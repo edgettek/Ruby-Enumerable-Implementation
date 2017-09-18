@@ -1,0 +1,2 @@
+class Enumerable_unit_tests
+end
