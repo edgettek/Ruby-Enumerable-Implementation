@@ -1259,7 +1259,4 @@ class Enumerable_unit_tests < Minitest::Test
     assert_nil result, nil
   end
 
-
-
-
 end
