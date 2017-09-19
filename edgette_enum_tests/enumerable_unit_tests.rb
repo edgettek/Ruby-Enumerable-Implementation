@@ -530,87 +530,102 @@ class Enumerable_unit_tests < Minitest::Test
   end
 
 
-  # # first → obj or nil
-  #
-  # def test_first_ints
-  #
-  #   result = @integers.first
-  #
-  #   assert_equal result, 1
-  #
-  # end
-  #
-  # def test_first_strings
-  #
-  #   result = @strings.first
-  #
-  #   assert_equal result, "Kyle"
-  #
-  # end
-  #
-  # # first(n) → an_array
-  #
-  # def test_first_ints_2
-  #
-  #   result = @integers.first(2)
-  #
-  #   assert_equal result, [1, 2]
-  #
-  # end
-  #
-  # def test_first_strings_2
-  #
-  #   result = @strings.first(3)
-  #
-  #   assert_equal result, ["Kyle", "Preston", "Renato"]
-  #
-  # end
-  #
-  # # flat_map { |obj| block } → array %same as collect_concat
-  #
-  #
-  # # grep(pattern) → array
-  #
-  # def test_grep_ints
-  #
-  #   result = @integers.grep 1
-  #
-  #   assert_equal result, [1]
-  #
-  # end
-  #
-  # def test_grep_strings
-  #
-  #   result = @strings.grep 'Preston'
-  #
-  #   assert_equal result, ['Preston']
-  #
-  # end
-  #
-  # # grep(pattern) { |obj| block} → array
-  #
-  # def test_grep_ints_2
-  #
-  #   result = @integers.grep(1) do |num|
-  #     print num
-  #   end
-  #
-  #   print result
-  #
-  #   assert_equal result, [nil]
-  #
-  # end
-  #
-  # def test_grep_strings_2
-  #
-  #   result = @strings.grep('Preston')  do |name|
-  #     print name
-  #   end
-  #
-  #   assert_equal result, [nil]
-  #
-  # end
-  #
+  # first → obj or nil
+
+  def test_first_ints
+
+    result = @integers.first
+
+    assert_equal result, 1
+
+  end
+
+  def test_first_strings
+
+    result = @strings.first
+
+    assert_equal result, "Kyle"
+
+  end
+
+  # first(n) → an_array
+
+  def test_first_ints_2
+
+    result = @integers.first(2)
+
+    assert_equal result, [1, 2]
+
+  end
+
+  def test_first_strings_2
+
+    result = @strings.first(3)
+
+    assert_equal result, ["Kyle", "Preston", "Renato"]
+
+  end
+
+  # flat_map { |obj| block } → array %same as collect_concat
+
+  def test_flat_map_ints
+    results = @integers.flat_map do |num|
+      num*num
+    end
+
+    assert_equal results, [1, 4, 9]
+  end
+
+  def test_flat_map_strings
+    results = @strings.flat_map do |name|
+      name + '!'
+    end
+
+    assert_equal results, ['Kyle!','Preston!', 'Renato!']
+  end
+
+  # grep(pattern) → array
+
+  def test_grep_ints
+
+    result = @integers.grep 1
+
+    assert_equal result, [1]
+
+  end
+
+  def test_grep_strings
+
+    result = @strings.grep 'Preston'
+
+    assert_equal result, ['Preston']
+
+  end
+
+  # grep(pattern) { |obj| block} → array
+
+  def test_grep_ints_2
+
+    result = @integers.grep(1) do |num|
+      print num
+    end
+
+    print result
+
+    assert_equal result, [nil]
+
+  end
+
+  def test_grep_strings_2
+
+    result = @strings.grep('Preston')  do |name|
+      print name
+    end
+
+    assert_equal result, [nil]
+
+  end
+
   # # grep_v(pattern) → array
   #
   # def test_grep_v_ints
@@ -657,32 +672,32 @@ class Enumerable_unit_tests < Minitest::Test
   #
   # # group_by { |obj| block } → a_hash
   #
-  # # include?(obj) → true or false %same as member
-  #
-  # def test_include_int_1
-  #   result = @integers.include? 2
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_include_int_2
-  #   result = @integers.include? 4
-  #
-  #   assert_equal result, false
-  # end
-  #
-  # def test_include_strings_1
-  #   result = @strings.include? 'Kyle'
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_include_strings_2
-  #   result = @strings.include? 'Toby'
-  #
-  #   assert_equal result, false
-  # end
-  #
+  # include?(obj) → true or false %same as member
+
+  def test_include_int_1
+    result = @integers.include? 2
+
+    assert_equal result, true
+  end
+
+  def test_include_int_2
+    result = @integers.include? 4
+
+    assert_equal result, false
+  end
+
+  def test_include_strings_1
+    result = @strings.include? 'Kyle'
+
+    assert_equal result, true
+  end
+
+  def test_include_strings_2
+    result = @strings.include? 'Toby'
+
+    assert_equal result, false
+  end
+
   # # inject(initial, sym) → obj %same as reduce (all of inject)
   #
   #
@@ -691,25 +706,25 @@ class Enumerable_unit_tests < Minitest::Test
   # # inject(initial) { |memo, obj| block } → obj
   # # inject { |memo, obj| block } → obj
   #
-  # # map { |obj| block } → array % same as collect
-  #
-  # def test_map_ints
-  #   results = @integers.map do |num|
-  #     num*num
-  #   end
-  #
-  #   assert_equal results, [1, 4, 9]
-  # end
-  #
-  # def test_map_strings
-  #   results = @strings.map do |name|
-  #     name + '!'
-  #   end
-  #
-  #   assert_equal results, ['Kyle!', 'Preston!', 'Renato!']
-  # end
-  #
-  #
+  # map { |obj| block } → array % same as collect
+
+  def test_map_ints
+    results = @integers.map do |num|
+      num*num
+    end
+
+    assert_equal results, [1, 4, 9]
+  end
+
+  def test_map_strings
+    results = @strings.map do |name|
+      name + '!'
+    end
+
+    assert_equal results, ['Kyle!', 'Preston!', 'Renato!']
+  end
+
+
   # # max → obj
   #
   # def test_max_ints
@@ -811,32 +826,32 @@ class Enumerable_unit_tests < Minitest::Test
   #   assert_equal result, ['Preston', 'Renato']
   # end
   #
-  # # member?(obj) → true or false %same as include
-  #
-  # def test_member_int_1
-  #   result = @integers.member? 2
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_member_int_2
-  #   result = @integers.member? 4
-  #
-  #   assert_equal result, false
-  # end
-  #
-  # def test_member_strings_1
-  #   result = @strings.member? 'Kyle'
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_member_strings_2
-  #   result = @strings.member? 'Toby'
-  #
-  #   assert_equal result, false
-  # end
-  #
+  # member?(obj) → true or false %same as include
+
+  def test_member_int_1
+    result = @integers.member? 2
+
+    assert_equal result, true
+  end
+
+  def test_member_int_2
+    result = @integers.member? 4
+
+    assert_equal result, false
+  end
+
+  def test_member_strings_1
+    result = @strings.member? 'Kyle'
+
+    assert_equal result, true
+  end
+
+  def test_member_strings_2
+    result = @strings.member? 'Toby'
+
+    assert_equal result, false
+  end
+
   # # min → obj
   #
   # def test_min_ints

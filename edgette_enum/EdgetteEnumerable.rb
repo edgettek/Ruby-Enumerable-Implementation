@@ -235,48 +235,180 @@ module EdgetteEnumerable
 
 
   # first → obj or nil
+  # first(n) → an_array
 
-  def first
-
+  def first(*args)
     found = nil
+    if args.size == 0
 
-    each do |element|
-      found = element
-      break
+      each do |element|
+        found = element
+        break
+      end
+    else
+
+      found = []
+      index = -1;
+
+      each do |element|
+        index += 1
+        if index < args[0]
+          found << element
+        end
+      end
     end
+
 
     found
   end
 
-  # first(n) → an_array
+
   # flat_map { |obj| block } → array %same as collect_concat
+
+  def flat_map(*args)
+
+    array = []
+
+    each do |element|
+      array << yield(element)
+    end
+
+    array
+  end
+
   # grep(pattern) → array
   # grep(pattern) { |obj| block} → array
+
+  def grep(*args)
+
+    array = []
+
+    if block_given?
+
+      each do |element|
+        if args[0] === element
+          array << yield(element)
+        end
+      end
+
+    else
+      each do |element|
+        if args[0] === element
+          array << element
+        end
+      end
+    end
+    array
+  end
+
   # grep_v(pattern) → array
   # grep_v(pattern) { |obj| block } → array
   # group_by { |obj| block } → a_hash
+
   # include?(obj) → true or false %same as member
+
+  def include?(obj)
+
+    include = false
+
+    each do |element|
+      if obj == element
+        include = true
+        break
+      end
+    end
+    include
+  end
+
   # inject(initial, sym) → obj %same as reduce (all of inject)
   # inject(sym) → obj
   # inject(initial) { |memo, obj| block } → obj
   # inject { |memo, obj| block } → obj
+
+
+
   # map { |obj| block } → array % same as collect
+
+  def map(*args)
+
+    array = []
+
+    each do |element|
+      array << yield(element)
+    end
+
+    array
+
+  end
+
   # max → obj
   # max { |a, b| block } → obj
   # max(n) → array
   # max(n) {|a,b| block } → obj
+
+  def max(*args)
+
+    max = first()
+
+    if block_given?
+
+    else
+
+      if args.size == 0
+        each do |element|
+          if max < element
+            max = element
+          end
+        end
+      else
+
+        each do |element|
+          if max < element
+            max = element
+          end
+        end
+
+      end
+
+
+    end
+
+
+
+  end
+
+
+
   # max_by {|obj| block } → obj
   # max_by(n) {|obj| block } → obj
+
   # member?(obj) → true or false %same as include
+  def member?(obj)
+
+    include = false
+
+    each do |element|
+      if obj == element
+        include = true
+        break
+      end
+    end
+    include
+  end
+
+
   # min → obj
   # min {| a,b | block } → obj
   # min(n) → array
   # min(n) {| a,b | block } → array
+
   # min_by {|obj| block } → obj
   # min_by(n) {|obj| block } → array
+
   # minmax → [min, max]
   # minmax { |a, b| block } → [min, max]
   # minmax_by { |obj| block } → [min, max]
+
   # none? { |obj| block } → true or false
   # one? { |obj| block } → true or false
   # partition { |obj| block } → [ true_array, false_array ]
