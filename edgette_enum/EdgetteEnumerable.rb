@@ -1,4 +1,4 @@
-class CustomEnumerable
+module EdgetteEnumerable
 
   # all?[{ |obj| block }] → true or false
   # any?[{ |obj| block }] → true or false
@@ -9,23 +9,53 @@ class CustomEnumerable
 
 
   # count → int
+  # count(item) → int
+  # count { |obj| block } → int
 
-  def count
-
+  def count(*args)
     size = 0
-    each do |element|
-      size += 1
+
+    if block_given?
+      size = 0
+      each do |element|
+        if yield(element)
+          size += 1
+        end
+      end
+    elsif args.size == 0
+      size = 0
+      each do |element|
+        size += 1
+      end
+    elsif args.size == 1
+        size = 0
+        each do |element|
+          if element.eql? args[0]
+            size += 1
+          end
+        end
     end
 
     size
   end
 
 
-  # count(item) → int
-  # count { |obj| block } → int
+
+
   # cycle(n=nil) { |obj| block } → nil
+
   # detect(ifnone = nil) { |obj| block } → obj or nil
+
+
   # drop(n) → array
+
+  def drop(n)
+
+
+
+  end
+
+
   # drop_while { |arr| block } → array
   # each_cons(n) { ... } → nil
   # each_entry{ |obj| block } → enum
