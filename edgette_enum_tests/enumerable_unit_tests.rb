@@ -11,96 +11,113 @@ class Enumerable_unit_tests < Minitest::Test
 
   # all?[{ |obj| block }] → true or false
 
-  # def test_all_ints
-  #   result = @integers.all? do |num|
-  #     num != 0
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_all_ints_2
-  #   result = @integers.all? do |num|
-  #     num > 2
-  #   end
-  #
-  #   assert_equal result, false
-  # end
-  #
-  # def test_all_strings
-  #   result = @strings.all? do |name|
-  #     name.length != 0
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_all_strings_2
-  #   result = @strings.all? do |name|
-  #     name.length > 5
-  #   end
-  #
-  #   assert_equal result, false
-  # end
-  #
-  # # any?[{ |obj| block }] → true or false
-  #
-  # def test_any_ints
-  #   result = @integers.any? do |num|
-  #     num != 0
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_any_ints_2
-  #   result = @integers.any? do |num|
-  #     num > 2
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_any_strings
-  #   result = @strings.any? do |name|
-  #     name.length != 0
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_any_strings_2
-  #   result = @strings.any? do |name|
-  #     name.length > 5
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  #
+  def test_all_ints
+    result = @integers.all? do |num|
+      num != 0
+    end
+
+    assert_equal result, true
+  end
+
+  def test_all_ints_2
+    result = @integers.all? do |num|
+      num > 2
+    end
+
+    assert_equal result, false
+  end
+
+  def test_all_strings
+    result = @strings.all? do |name|
+      name.length != 0
+    end
+
+    assert_equal result, true
+  end
+
+  def test_all_strings_2
+    result = @strings.all? do |name|
+      name.length > 5
+    end
+
+    assert_equal result, false
+  end
+
+  # any?[{ |obj| block }] → true or false
+
+  def test_any_ints
+    result = @integers.any? do |num|
+      num != 0
+    end
+
+    assert_equal result, true
+  end
+
+  def test_any_ints_2
+    result = @integers.any? do |num|
+      num > 2
+    end
+
+    assert_equal result, true
+  end
+
+  def test_any_strings
+    result = @strings.any? do |name|
+      name.length != 0
+    end
+
+    assert_equal result, true
+  end
+
+  def test_any_strings_2
+    result = @strings.any? do |name|
+      name.length > 5
+    end
+
+    assert_equal result, true
+  end
+
+
   # # chunk { |elt| ... } → array
   # # chunk_while { |elt_before,elt_after| bool } → array
   #
   #
-  # # collect { |obj| block } → array % same as map
-  #
-  # def test_collect_ints
-  #   results = @integers.collect do |num|
-  #     num*num
-  #   end
-  #
-  #   assert_equal results, [1, 4, 9]
-  # end
-  #
-  # def test_collect_strings
-  #   results = @strings.collect do |name|
-  #     name + '!'
-  #   end
-  #
-  #   assert_equal results, ['Kyle!', 'Preston!', 'Renato!']
-  # end
+  # collect { |obj| block } → array % same as map
+
+  def test_collect_ints
+    results = @integers.collect do |num|
+      num*num
+    end
+
+    assert_equal results, [1, 4, 9]
+  end
+
+  def test_collect_strings
+    results = @strings.collect do |name|
+      name + '!'
+    end
+
+    assert_equal results, ['Kyle!', 'Preston!', 'Renato!']
+  end
 
   # collect_concat { |obj| block } → array % same as flat_map
+
+  def test_collect_concat_ints
+    results = @integers.collect_concat do |num|
+      num*num
+    end
+
+    assert_equal results, [1, 4, 9]
+  end
+
+  def test_collect_concat_strings
+    results = @strings.collect_concat do |name|
+      name + '!'
+    end
+
+    assert_equal results, ['Kyle!','Preston!', 'Renato!']
+  end
+
 
   # count { |obj| block } → int
 
@@ -260,25 +277,25 @@ class Enumerable_unit_tests < Minitest::Test
   end
 
 
-  # # drop_while { |arr| block } → array
-  #
-  # def test_drop_while_ints
-  #   result = @integers.drop_while do |num|
-  #     num<3
-  #   end
-  #
-  #   assert_equal result, [3]
-  # end
-  #
-  # def test_drop_while_strings
-  #   result = @strings.drop_while do |name|
-  #     name<'Liz'
-  #   end
-  #
-  #   assert_equal result, ["Preston", "Renato"]
-  # end
-  #
-  #
+  # drop_while { |arr| block } → array
+
+  def test_drop_while_ints
+    result = @integers.drop_while do |num|
+      num<3
+    end
+
+    assert_equal result, [3]
+  end
+
+  def test_drop_while_strings
+    result = @strings.drop_while do |name|
+      name<'Liz'
+    end
+
+    assert_equal result, ["Preston", "Renato"]
+  end
+
+
   # # each_cons(n) { ... } → nil
   #
   # def test_each_cons_ints
@@ -379,140 +396,140 @@ class Enumerable_unit_tests < Minitest::Test
   #
   # end
   #
-  # # find(ifnone = nil) { |obj| block } → obj or nil
-  #
-  # def test_find_1_ints
-  #   result = @integers.find do |number|
-  #     number%2 == 0
-  #   end
-  #
-  #   assert_equal result, 2
-  # end
-  #
-  # def test_find_2_ints
-  #   result = @integers.find(nil) do |number|
-  #     number%5 == 0
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  # def test_find_1_strings
-  #   result = @strings.find(nil) do |name|
-  #     name > 'Allison'
-  #   end
-  #
-  #   assert_equal result, 'Kyle'
-  # end
-  #
-  # def test_find_2_strings
-  #   result = @strings.find(nil) do |name|
-  #     name < 'Allison'
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  #
-  # # find_all { |obj| block } → array % same as select
-  #
-  # def test_find_all_ints
-  #
-  #   result = @integers.find_all do |num|
-  #     num % 2 == 0
-  #   end
-  #
-  #   assert_equal result, [2]
-  #
-  # end
-  #
-  # def test_find_all_strings
-  #
-  #   result = @strings.find_all do |name|
-  #     name.eql? 'Kyle'
-  #   end
-  #
-  #   assert_equal result, ['Kyle']
-  #
-  # end
-  #
-  # # find_index(value) → int or nil
-  #
-  # def test_find_index_ints
-  #
-  #   result = @integers.find_index(3)
-  #
-  #   assert_equal result, 2
-  #
-  # end
-  #
-  # def test_find_index_ints_2
-  #
-  #   result = @integers.find_index(45)
-  #
-  #   assert_nil result, nil
-  #
-  # end
-  #
-  # def test_find_index_strings
-  #
-  #   result = @strings.find_index("Preston")
-  #
-  #   assert_equal result, 1
-  #
-  # end
-  #
-  # def test_find_index_strings_2
-  #
-  #   result = @strings.find_index("Anna")
-  #
-  #   assert_nil result, nil
-  #
-  # end
-  #
-  # # find_index { |obj| block } → int or nil
-  #
-  # def test_find_index_ints_block
-  #
-  #   result = @integers.find_index do |num|
-  #     num > 1
-  #   end
-  #
-  #   assert_equal result, 1
-  #
-  # end
-  #
-  # def test_find_index_ints_2_block
-  #
-  #   result = @integers.find_index do |num|
-  #     num > 30
-  #   end
-  #
-  #   assert_nil result, nil
-  #
-  # end
-  #
-  # def test_find_index_strings_block
-  #
-  #   result = @strings.find_index do |name|
-  #     name < 'Quinn'
-  #   end
-  #
-  #   assert_equal result, 0
-  #
-  # end
-  #
-  # def test_find_index_strings_2_block
-  #
-  #   result = @strings.find_index do |name|
-  #     name < 'Anna'
-  #   end
-  #
-  #   assert_nil result, nil
-  #
-  # end
-  #
-  #
+  # find(ifnone = nil) { |obj| block } → obj or nil
+
+  def test_find_1_ints
+    result = @integers.find do |number|
+      number%2 == 0
+    end
+
+    assert_equal result, 2
+  end
+
+  def test_find_2_ints
+    result = @integers.find(nil) do |number|
+      number%5 == 0
+    end
+
+    assert_nil result, nil
+  end
+
+  def test_find_1_strings
+    result = @strings.find(nil) do |name|
+      name > 'Allison'
+    end
+
+    assert_equal result, 'Kyle'
+  end
+
+  def test_find_2_strings
+    result = @strings.find(nil) do |name|
+      name < 'Allison'
+    end
+
+    assert_nil result, nil
+  end
+
+
+  # find_all { |obj| block } → array % same as select
+
+  def test_find_all_ints
+
+    result = @integers.find_all do |num|
+      num % 2 == 0
+    end
+
+    assert_equal result, [2]
+
+  end
+
+  def test_find_all_strings
+
+    result = @strings.find_all do |name|
+      name.eql? 'Kyle'
+    end
+
+    assert_equal result, ['Kyle']
+
+  end
+
+  # find_index(value) → int or nil
+
+  def test_find_index_ints
+
+    result = @integers.find_index(3)
+
+    assert_equal result, 2
+
+  end
+
+  def test_find_index_ints_2
+
+    result = @integers.find_index(45)
+
+    assert_nil result, nil
+
+  end
+
+  def test_find_index_strings
+
+    result = @strings.find_index("Preston")
+
+    assert_equal result, 1
+
+  end
+
+  def test_find_index_strings_2
+
+    result = @strings.find_index("Anna")
+
+    assert_nil result, nil
+
+  end
+
+  # find_index { |obj| block } → int or nil
+
+  def test_find_index_ints_block
+
+    result = @integers.find_index do |num|
+      num > 1
+    end
+
+    assert_equal result, 1
+
+  end
+
+  def test_find_index_ints_2_block
+
+    result = @integers.find_index do |num|
+      num > 30
+    end
+
+    assert_nil result, nil
+
+  end
+
+  def test_find_index_strings_block
+
+    result = @strings.find_index do |name|
+      name < 'Quinn'
+    end
+
+    assert_equal result, 0
+
+  end
+
+  def test_find_index_strings_2_block
+
+    result = @strings.find_index do |name|
+      name < 'Anna'
+    end
+
+    assert_nil result, nil
+
+  end
+
+
   # # first → obj or nil
   #
   # def test_first_ints
