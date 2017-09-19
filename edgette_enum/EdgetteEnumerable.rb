@@ -468,10 +468,70 @@ module EdgetteEnumerable
 
 
   # partition { |obj| block } → [ true_array, false_array ]
+
+  def partition
+
+    array_true = []
+    array_false = []
+
+    each do |element|
+
+      if yield(element)
+        array_true << element
+      else
+        array_false << element
+      end
+
+
+    end
+
+    result = [array_true, array_false]
+
+    result
+  end
+
   # reduce %see inject above
+
   # reject { |obj| block } → array
+
+  def reject
+    array_false = []
+
+    each do |element|
+
+      if !yield(element)
+        array_false << element
+      end
+    end
+
+    array_false
+  end
+
+
   # reverse_each(*args) { |item| block } → enum
+
+
   # select { |obj| block } → array % same as find_all
+
+  def select(*args)
+
+    array = []
+
+    if block_given?
+
+      each do |element|
+        if yield(element)
+          array << element
+        end
+      end
+
+    end
+
+    array
+
+  end
+
+
   # slice_after(pattern) → array
   # slice_after { |elt| bool } → array
   # slice_before(pattern) → array

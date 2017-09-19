@@ -1045,78 +1045,78 @@ class Enumerable_unit_tests < Minitest::Test
     assert_equal result, true
   end
 
-  # # partition { |obj| block } → [ true_array, false_array ]
-  #
-  # def test_partition_ints
-  #
-  #   result = @integers.partition do |num|
-  #     num.even?
-  #   end
-  #
-  #   assert_equal result, [[2], [1, 3]]
-  #
-  # end
-  #
-  # def test_partition_strings
-  #
-  #   result = @strings.partition do |name|
-  #     name.length == 4
-  #   end
-  #
-  #   assert_equal result, [['Kyle'], ['Preston', 'Renato']]
-  #
-  # end
-  #
+  # partition { |obj| block } → [ true_array, false_array ]
+
+  def test_partition_ints
+
+    result = @integers.partition do |num|
+      num.even?
+    end
+
+    assert_equal result, [[2], [1, 3]]
+
+  end
+
+  def test_partition_strings
+
+    result = @strings.partition do |name|
+      name.length == 4
+    end
+
+    assert_equal result, [['Kyle'], ['Preston', 'Renato']]
+
+  end
+
   # # reduce %see inject above
   #
   #
-  # # reject { |obj| block } → array
-  #
-  # def test_reject_ints
-  #
-  #   result = @integers.reject do |num|
-  #     num > 2
-  #   end
-  #
-  #   assert_equal result, [1, 2]
-  #
-  # end
-  #
-  # def test_reject_strings
-  #
-  #   result = @strings.reject do |name|
-  #     name.length > 5
-  #   end
-  #
-  #   assert_equal result, ['Kyle']
-  #
-  # end
-  #
+  # reject { |obj| block } → array
+
+  def test_reject_ints
+
+    result = @integers.reject do |num|
+      num > 2
+    end
+
+    assert_equal result, [1, 2]
+
+  end
+
+  def test_reject_strings
+
+    result = @strings.reject do |name|
+      name.length > 5
+    end
+
+    assert_equal result, ['Kyle']
+
+  end
+
   # # reverse_each(*args) { |item| block } → enum
   #
-  # # select { |obj| block } → array % same as find_all
-  #
-  # def test_select_ints
-  #
-  #   result = @integers.select do |num|
-  #     num % 2 == 0
-  #   end
-  #
-  #   assert_equal result, [2]
-  #
-  # end
-  #
-  # def test_select_strings
-  #
-  #   result = @strings.select do |name|
-  #     name.eql? 'Kyle'
-  #   end
-  #
-  #   assert_equal result, ['Kyle']
-  #
-  # end
-  #
-  #
+  # select { |obj| block } → array % same as find_all
+
+  def test_select_ints
+
+    result = @integers.select do |num|
+      num % 2 == 0
+    end
+
+    assert_equal result, [2]
+
+  end
+
+  def test_select_strings
+
+    result = @strings.select do |name|
+      name.eql? 'Kyle'
+    end
+
+    assert_equal result, ['Kyle']
+
+  end
+
+
   # # slice_after(pattern) → array
   # # slice_after { |elt| bool } → array
   # # slice_before(pattern) → array
