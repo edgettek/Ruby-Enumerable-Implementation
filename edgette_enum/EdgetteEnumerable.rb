@@ -410,7 +410,63 @@ module EdgetteEnumerable
   # minmax_by { |obj| block } → [min, max]
 
   # none? { |obj| block } → true or false
+
+  def none?
+
+    none_are_true = true
+
+    if block_given?
+      each do |element|
+        if yield(element)
+          none_are_true = false
+          break
+        end
+      end
+    else
+      each do |element|
+        if element
+          none_are_true = false
+          break
+        end
+      end
+    end
+
+    none_are_true
+  end
+
   # one? { |obj| block } → true or false
+
+  def one?
+
+    num_true = 0
+    one = false
+
+    if block_given?
+
+      each do |element|
+        if yield(element)
+          num_true += 1
+        end
+      end
+
+    else
+
+      each do |element|
+        if element
+          num_true += 1
+        end
+      end
+
+    end
+
+    if num_true == 1
+      one = true
+    end
+
+    one
+  end
+
+
   # partition { |obj| block } → [ true_array, false_array ]
   # reduce %see inject above
   # reject { |obj| block } → array

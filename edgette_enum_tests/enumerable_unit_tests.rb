@@ -1003,48 +1003,48 @@ class Enumerable_unit_tests < Minitest::Test
   #
   #   assert_equal result, ['Kyle', 'Preston']
   # end
-  #
-  # # none? { |obj| block } → true or false
-  #
-  # def test_none_integers
-  #
-  #   result = @integers.none? do |num|
-  #     num*num == 25
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_none_strings
-  #
-  #   result = @strings.none? do |name|
-  #     name.length < 5
-  #   end
-  #
-  #   assert_equal result, false
-  # end
-  #
-  #
-  # # one? { |obj| block } → true or false
-  #
-  # def test_one_integers
-  #
-  #   result = @integers.one? do |num|
-  #     num*num == 9
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
-  # def test_one_strings
-  #
-  #   result = @strings.one? do |name|
-  #     name.length < 5
-  #   end
-  #
-  #   assert_equal result, true
-  # end
-  #
+
+  # none? { |obj| block } → true or false
+
+  def test_none_integers
+
+    result = @integers.none? do |num|
+      num*num == 25
+    end
+
+    assert_equal result, true
+  end
+
+  def test_none_strings
+
+    result = @strings.none? do |name|
+      name.length < 5
+    end
+
+    assert_equal result, false
+  end
+
+
+  # one? { |obj| block } → true or false
+
+  def test_one_integers
+
+    result = @integers.one? do |num|
+      num*num == 9
+    end
+
+    assert_equal result, true
+  end
+
+  def test_one_strings
+
+    result = @strings.one? do |name|
+      name.length < 5
+    end
+
+    assert_equal result, true
+  end
+
   # # partition { |obj| block } → [ true_array, false_array ]
   #
   # def test_partition_ints
