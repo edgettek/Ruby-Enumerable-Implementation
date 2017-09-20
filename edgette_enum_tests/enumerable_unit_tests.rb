@@ -738,8 +738,8 @@ class Enumerable_unit_tests < Minitest::Test
   end
 
 
-  # # max → obj
-  #
+  # max → obj
+
   # def test_max_ints
   #   result = @integers.max
   #
@@ -802,7 +802,7 @@ class Enumerable_unit_tests < Minitest::Test
   #
   #   assert_equal result, ['Preston', 'Renato']
   # end
-  #
+
   # # max_by {|obj| block } → obj
   #
   # def test_max_by_ints
@@ -1130,35 +1130,84 @@ class Enumerable_unit_tests < Minitest::Test
   end
 
 
-  # # slice_after(pattern) → array
-  # # slice_after { |elt| bool } → array
+  # slice_after(pattern) → array
+  # slice_after { |elt| bool } → array
+
+  def test_slice_after_ints
+
+    result = @integers.slice_after(2)
+
+    assert_equal [[1,2],[3]], result
+  end
+
+  def test_slice_after_strings
+
+    result = @strings.slice_after('Preston')
+
+    assert_equal [['Kyle', 'Preston'],['Renato']], result
+  end
+
+
+
   # # slice_before(pattern) → array
   # # slice_before { |elt| bool } → array
-  # # slice_when { |elt_before, elt_after| bool } → array
+
+  def test_slice_before_ints
+
+    result = @integers.slice_before(2)
+
+    assert_equal [[1],[2,3]], result
+  end
+
+  def test_slice_before_strings
+
+    result = @strings.slice_before('Preston')
+
+    assert_equal [['Kyle'],['Preston','Renato']], result
+  end
+
+
+  # slice_when { |elt_before, elt_after| bool } → array
+
+  # def test_slice_when_ints
   #
+  #   result = @integers.slice_when do |a, b|
+  #     a+b>4
+  #   end
   #
+  #   assert_equal [[1],[2,3]], result
+  # end
   #
+  # def test_slice_when_strings
+  #
+  #   result = @strings.slice_when do |a,b|
+  #     a.length < b.length
+  #   end
+  #
+  #   assert_equal [['Kyle'],['Preston','Renato']], result
+  # end
+
   # sort { |a, b| block } → array
 
-  def test_sort_ints
-
-    result = @integers.sort do |a, b|
-      a <=> b
-    end
-
-    assert_equal result, [1, 2, 3]
-
-  end
-
-  def test_sort_strings
-
-    result = @strings.sort do |a, b|
-      a.length <=> b.length
-    end
-
-    assert_equal result, ['Kyle', 'Renato', 'Preston']
-
-  end
+  # def test_sort_ints
+  #
+  #   result = @integers.sort do |a, b|
+  #     a <=> b
+  #   end
+  #
+  #   assert_equal result, [1, 2, 3]
+  #
+  # end
+  #
+  # def test_sort_strings
+  #
+  #   result = @strings.sort do |a, b|
+  #     a.length <=> b.length
+  #   end
+  #
+  #   assert_equal result, ['Kyle', 'Renato', 'Preston']
+  #
+  # end
 
   # # sort_by { |obj| block } → array
   #

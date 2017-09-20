@@ -424,7 +424,7 @@ module EdgetteEnumerable
   # max → obj
   # max { |a, b| block } → obj
   # max(n) → array
-  # max(n) {|a,b| block } → obj
+  # max(n) {|a,b| block } → array
 
   def max(*args)
 
@@ -434,7 +434,9 @@ module EdgetteEnumerable
 
       if args.size == 2
 
+        array = to_a().sort()
 
+        max = array.first(args[0])
 
       else
         each do |a, b|
@@ -457,11 +459,9 @@ module EdgetteEnumerable
         end
       else
 
-        each do |element|
-          if max < element
-            max = element
-          end
-        end
+        array = to_a().sort.reverse
+
+        max = array.first(args[0])
 
       end
 
@@ -630,13 +630,114 @@ module EdgetteEnumerable
   # slice_after(pattern) → array
   # slice_after { |elt| bool } → array
 
+  def slice_after(pattern)
 
+    result = []
+
+    if block_given?
+
+      temp = []
+
+      each do |element|
+        print element
+        if yield(element)
+          temp << element
+          result << temp
+          print result
+          temp = []
+        else
+          temp << element
+        end
+      end
+      result << temp
+    else
+
+      temp = []
+
+      each do |element|
+        print "Considering element: "+ element.to_s + "\n"
+        if element === pattern
+          temp << element
+          result << temp
+          print "Current result: " + result.to_s
+          temp = []
+        else
+          temp << element
+        end
+      end
+      result << temp
+    end
+
+
+    result
+  end
 
   # slice_before(pattern) → array
   # slice_before { |elt| bool } → array
 
+  def slice_before(pattern)
+
+    result = []
+
+    if block_given?
+
+      temp = []
+
+      each do |element|
+        if yield(element)
+          result << temp
+          temp = []
+          temp << element
+        else
+          temp << element
+        end
+      end
+      result << temp
+    else
+
+      temp = []
+
+      each do |element|
+        if element === pattern
+
+          result << temp
+          temp = []
+          temp << element
+        else
+          temp << element
+        end
+      end
+      result << temp
+    end
+
+
+    result
+  end
+
 
   # slice_when { |elt_before, elt_after| bool } → array
+
+  # def slice_when
+  #
+  #   result = []
+  #
+  #   temp = []
+  #
+  #   each do |a, b|
+  #     if yield(a, b)
+  #       temp << a
+  #       result << temp
+  #       temp = []
+  #       temp << b
+  #     else
+  #       temp << a
+  #       temp << b
+  #     end
+  #   end
+  #   result << temp
+  #
+  #   result
+  # end
 
   # sort { |a, b| block } → array
 
