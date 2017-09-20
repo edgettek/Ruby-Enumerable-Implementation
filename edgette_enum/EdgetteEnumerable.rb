@@ -534,19 +534,116 @@ module EdgetteEnumerable
 
   # slice_after(pattern) → array
   # slice_after { |elt| bool } → array
+
+
+
   # slice_before(pattern) → array
   # slice_before { |elt| bool } → array
+
+
   # slice_when { |elt_before, elt_after| bool } → array
+
   # sort { |a, b| block } → array
+
+
+
+
   # sort_by { |obj| block } → array
+
+
+
   # sum(init=0) → number
   # sum(init=0) { |e| expr } → number
+
+  def sum(init=0, &block)
+
+    sum = init
+
+    if block_given?
+
+      each do |element|
+        sum += block.call(element)
+      end
+
+    else
+
+      each do |element|
+        sum += element
+      end
+
+    end
+
+    sum
+
+  end
+
   # take(n) → array
+
+  def take(n)
+
+    index = -1
+    array = []
+
+    each do |element|
+      index += 1
+
+      if index < n
+        array << element
+      end
+
+    end
+    array
+  end
+
   # take_while { |obj| block } → array
+  def take_while
+
+    array = []
+
+    each do |element|
+
+      if yield(element)
+        array << element
+      end
+
+    end
+    array
+  end
+
+
   # to_a(*args) → array
+
+  def to_a(*args)
+
+    array = []
+
+    each do |element|
+      array << element
+    end
+  return array
+  end
+
   # to_h(*args) → hash
+
   # uniq → new_ary
   # uniq → { |item| ... } → new_ary
+
+  def uniq
+
+    array = []
+
+
+    each do |element|
+      if !array.include?(element)
+        array << element
+      end
+    end
+
+
+
+    array
+  end
+
   # zip(arg, ...) → an_array_of_array
   # zip(arg, ...) → { |arr| block } → nil
 

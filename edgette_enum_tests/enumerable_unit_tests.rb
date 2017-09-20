@@ -1169,104 +1169,104 @@ class Enumerable_unit_tests < Minitest::Test
   #
   # end
   #
-  # # sum(init=0) → number
-  #
-  # def test_sum_ints
-  #   result = @integers.sum
-  #
-  #   assert_equal result, 6
-  # end
-  #
-  # # sum(init=0) { |e| expr } → number
-  #
-  # def test_sum_ints_1
-  #   result = @integers.sum do |num|
-  #     num*2
-  #   end
-  #
-  #   assert_equal result, 12
-  # end
-  #
-  # # take(n) → array
-  #
-  # def test_take_ints
-  #   result = @integers.take 2
-  #
-  #   assert_equal result, [1, 2]
-  # end
-  #
-  # def test_take_strings
-  #   result = @strings.take 1
-  #
-  #   assert_equal result, ['Kyle']
-  # end
-  #
-  # # take_while { |obj| block } → array
-  #
-  # def test_take_while_ints
-  #   result = @integers.take_while do |num|
-  #     num < 3
-  #   end
-  #
-  #   assert_equal result, [1, 2]
-  # end
-  #
-  # def test_take_while_strings
-  #   result = @strings.take_while do |name|
-  #     name.length < 5
-  #   end
-  #
-  #   assert_equal result, ['Kyle']
-  # end
-  #
-  # # to_a(*args) → array
-  #
-  # def test_to_a_ints
-  #   result = @integers.to_a
-  #
-  #   assert_equal result, [1, 2, 3]
-  # end
-  #
-  # def test_to_a_strings
-  #   result = @strings.to_a
-  #
-  #   assert_equal result, ['Kyle', 'Preston', 'Renato']
-  # end
-  #
+  # sum(init=0) → number
+
+  def test_sum_ints
+    result = @integers.sum
+
+    assert_equal result, 6
+  end
+
+  # sum(init=0) { |e| expr } → number
+
+  def test_sum_ints_1
+    result = @integers.sum do |num|
+      num*2
+    end
+
+    assert_equal result, 12
+  end
+
+  # take(n) → array
+
+  def test_take_ints
+    result = @integers.take 2
+
+    assert_equal result, [1, 2]
+  end
+
+  def test_take_strings
+    result = @strings.take 1
+
+    assert_equal result, ['Kyle']
+  end
+
+  # take_while { |obj| block } → array
+
+  def test_take_while_ints
+    result = @integers.take_while do |num|
+      num < 3
+    end
+
+    assert_equal result, [1, 2]
+  end
+
+  def test_take_while_strings
+    result = @strings.take_while do |name|
+      name.length < 5
+    end
+
+    assert_equal result, ['Kyle']
+  end
+
+  # to_a(*args) → array
+
+  def test_to_a_ints
+    result = @integers.to_a
+
+    assert_equal result, [1, 2, 3]
+  end
+
+  def test_to_a_strings
+    result = @strings.to_a
+
+    assert_equal result, ['Kyle', 'Preston', 'Renato']
+  end
+
   # # to_h(*args) → hash
   #
-  # # uniq → new_ary
-  #
-  # def test_uniq_ints
-  #   result = @integers.uniq
-  #
-  #   assert_equal result, [1, 2, 3]
-  # end
-  #
-  # def test_uniq_strings
-  #   result = @strings.uniq
-  #
-  #   assert_equal result, ['Kyle', 'Preston', 'Renato']
-  # end
-  #
-  # # uniq → { |item| ... } → new_ary
-  #
-  # def test_uniq_ints_2
-  #   result = @integers.uniq do |num|
-  #     num*2
-  #   end
-  #
-  #   assert_equal result, [1, 2, 3]
-  # end
-  #
-  # def test_uniq_strings_2
-  #   result = @strings.uniq do |name|
-  #     name.length
-  #   end
-  #
-  #   assert_equal result, ['Kyle', 'Preston', 'Renato']
-  # end
-  #
+  # uniq → new_ary
+
+  def test_uniq_ints
+    result = @integers.uniq
+
+    assert_equal result, [1, 2, 3]
+  end
+
+  def test_uniq_strings
+    result = @strings.uniq
+
+    assert_equal result, ['Kyle', 'Preston', 'Renato']
+  end
+
+  # uniq → { |item| ... } → new_ary
+
+  def test_uniq_ints_2
+    result = @integers.uniq do |num|
+      num*2
+    end
+
+    assert_equal result, [1, 2, 3]
+  end
+
+  def test_uniq_strings_2
+    result = @strings.uniq do |name|
+      name.length
+    end
+
+    assert_equal result, ['Kyle', 'Preston', 'Renato']
+  end
+
   # # zip(arg, ...) → an_array_of_array
   #
   # def test_zip_ints
