@@ -206,60 +206,60 @@ class Enumerable_unit_tests < Minitest::Test
 
 
 
-  # # cycle(n=nil) { |obj| block } → nil
-  #
-  # def test_cycle_ints
-  #   result = @integers.cycle(3) do |number|
-  #     print number
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  # def test_cycle_string
-  #   result = @strings.cycle(3) do |name|
-  #     print name
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  #
-  # # detect(ifnone = nil) { |obj| block } → obj or nil
-  #
-  # def test_detect_1_ints
-  #   result = @integers.detect do |number|
-  #     number%2 == 0
-  #   end
-  #
-  #   assert_equal result, 2
-  # end
-  #
-  # def test_detect_2_ints
-  #   result = @integers.detect(nil) do |number|
-  #     number%5 == 0
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  # def test_detect_1_strings
-  #   result = @strings.detect(nil) do |name|
-  #     name > 'Allison'
-  #   end
-  #
-  #   assert_equal result, 'Kyle'
-  # end
-  #
-  # def test_detect_2_strings
-  #   result = @strings.detect(nil) do |name|
-  #     name < 'Allison'
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  #
+  # cycle(n=nil) { |obj| block } → nil
+
+  def test_cycle_ints
+    result = @integers.cycle(3) do |number|
+      print number
+    end
+
+    assert_nil result, nil
+  end
+
+  def test_cycle_string
+    result = @strings.cycle(3) do |name|
+      print name
+    end
+
+    assert_nil result, nil
+  end
+
+
+  # detect(ifnone = nil) { |obj| block } → obj or nil
+
+  def test_detect_1_ints
+    result = @integers.detect do |number|
+      number%2 == 0
+    end
+
+    assert_equal result, 2
+  end
+
+  def test_detect_2_ints
+    result = @integers.detect(nil) do |number|
+      number%5 == 0
+    end
+
+    assert_nil result, nil
+  end
+
+  def test_detect_1_strings
+    result = @strings.detect(nil) do |name|
+      name > 'Allison'
+    end
+
+    assert_equal result, 'Kyle'
+  end
+
+  def test_detect_2_strings
+    result = @strings.detect(nil) do |name|
+      name < 'Allison'
+    end
+
+    assert_nil result, nil
+  end
+
+
   # drop(n) → array
 
   def test_drop_ints
@@ -377,25 +377,25 @@ class Enumerable_unit_tests < Minitest::Test
   #   assert_equal result, ["Kyle!", "Preston!", "Renato!"]
   # end
   #
-  #
-  # # entries(*args) → array
-  #
-  # def test_entries_ints
-  #
-  #   result = @integers.entries
-  #
-  #   assert_equal result, [1, 2, 3]
-  #
-  # end
-  #
-  # def test_entries_string
-  #
-  #   result = @strings.entries
-  #
-  #   assert_equal result, ["Kyle", "Preston", "Renato"]
-  #
-  # end
-  #
+
+  # entries(*args) → array
+
+  def test_entries_ints
+
+    result = @integers.entries
+
+    assert_equal result, [1, 2, 3]
+
+  end
+
+  def test_entries_string
+
+    result = @strings.entries
+
+    assert_equal result, ["Kyle", "Preston", "Renato"]
+
+  end
+
   # find(ifnone = nil) { |obj| block } → obj or nil
 
   def test_find_1_ints
@@ -626,52 +626,65 @@ class Enumerable_unit_tests < Minitest::Test
 
   end
 
-  # # grep_v(pattern) → array
-  #
-  # def test_grep_v_ints
-  #
-  #   result = @integers.grep_v 1
-  #
-  #   assert_equal result, [2, 3]
-  #
-  # end
-  #
-  # def test_grep_v_strings
-  #
-  #   result = @strings.grep_v 'Preston'
-  #
-  #   assert_equal result, ['Kyle', 'Renato']
-  #
-  # end
-  #
-  #
-  # # grep_v(pattern) { |obj| block } → array
-  #
-  # def test_grep_v_ints_2
-  #
-  #   result = @integers.grep_v(1) do |num|
-  #     print num
-  #   end
-  #
-  #   print result
-  #
-  #   assert_equal result, [nil, nil]
-  #
-  # end
-  #
-  # def test_grep_v_strings_2
-  #
-  #   result = @strings.grep_v('Preston')  do |name|
-  #     print name
-  #   end
-  #
-  #   assert_equal result, [nil, nil]
-  #
-  # end
-  #
-  #
-  # # group_by { |obj| block } → a_hash
-  #
+  # grep_v(pattern) → array
+
+  def test_grep_v_ints
+
+    result = @integers.grep_v 1
+
+    assert_equal result, [2, 3]
+
+  end
+
+  def test_grep_v_strings
+
+    result = @strings.grep_v 'Preston'
+
+    assert_equal result, ['Kyle', 'Renato']
+
+  end
+
+
+  # grep_v(pattern) { |obj| block } → array
+
+  def test_grep_v_ints_2
+
+    result = @integers.grep_v(1) do |num|
+      print num
+    end
+
+    print result
+
+    assert_equal result, [nil, nil]
+
+  end
+
+  def test_grep_v_strings_2
+
+    result = @strings.grep_v('Preston')  do |name|
+      print name
+    end
+
+    assert_equal result, [nil, nil]
+
+  end
+
+
+  # group_by { |obj| block } → a_hash
+
+
+  def test_group_by
+    result = @integers.group_by do |num|
+      num % 2
+    end
+
+    hash = {0 => [2],1=>[1,3]}
+
+
+    assert_equal hash, result
+  end
+
+
   # include?(obj) → true or false %same as member
 
   def test_include_int_1
@@ -1125,28 +1138,28 @@ class Enumerable_unit_tests < Minitest::Test
   #
   #
   #
-  # # sort { |a, b| block } → array
-  #
-  # def test_sort_ints
-  #
-  #   result = @integers.sort do |a, b|
-  #     a <=> b
-  #   end
-  #
-  #   assert_equal result, [1, 2, 3]
-  #
-  # end
-  #
-  # def test_sort_strings
-  #
-  #   result = @strings.sort do |a, b|
-  #     a.length <=> b.length
-  #   end
-  #
-  #   assert_equal result, ['Kyle', 'Renato', 'Preston']
-  #
-  # end
-  #
+  # sort { |a, b| block } → array
+
+  def test_sort_ints
+
+    result = @integers.sort do |a, b|
+      a <=> b
+    end
+
+    assert_equal result, [1, 2, 3]
+
+  end
+
+  def test_sort_strings
+
+    result = @strings.sort do |a, b|
+      a.length <=> b.length
+    end
+
+    assert_equal result, ['Kyle', 'Renato', 'Preston']
+
+  end
+
   # # sort_by { |obj| block } → array
   #
   # def test_sort_by_ints

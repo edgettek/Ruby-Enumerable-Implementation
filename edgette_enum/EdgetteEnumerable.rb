@@ -4,46 +4,46 @@ module EdgetteEnumerable
 
   def all?(*args)
 
-    allAreTrue = true;
+    all_are_true = true
 
     if block_given?
       each do |element|
         if yield(element) == false || yield(element).nil?
-          allAreTrue = false;
+          all_are_true = false;
         end
       end
     else
       each do |element|
         if element == false || element.nil?
-          allAreTrue = false;
+          all_are_true = false;
         end
       end
     end
 
-    allAreTrue
+    all_are_true
   end
 
   # any?[{ |obj| block }] → true or false
 
   def any?(*args)
 
-    oneIsTrue = false;
+    one_is_true = false
 
     if block_given?
       each do |element|
         if !(yield(element) == false) && !yield(element).nil?
-          oneIsTrue = true;
+          one_is_true = true;
         end
       end
     else
       each do |element|
         if !(element == false) || !element.nil?
-          oneIsTrue = true;
+          one_is_true = true;
         end
       end
     end
 
-    oneIsTrue
+    one_is_true
   end
 
   # chunk { |elt| ... } → array
@@ -113,7 +113,32 @@ module EdgetteEnumerable
 
   # cycle(n=nil) { |obj| block } → nil
 
+  def cycle(n=nil)
+
+   for i in 1..n
+      each do |element|
+        yield(element)
+      end
+   end
+    nil
+  end
+
   # detect(ifnone = nil) { |obj| block } → obj or nil
+
+  def detect(ifnone = nil)
+
+    first_true = nil
+
+    each do |element|
+      if yield(element)
+        first_true = element
+        break
+      end
+    end
+
+    first_true
+
+  end
 
 
   # drop(n) → array
@@ -151,13 +176,23 @@ module EdgetteEnumerable
   end
 
   # each_cons(n) { ... } → nil
+
+
   # each_entry{ |obj| block } → enum
+
+
+
   # each_slice(n) { ... } → nil
   # each_with_index(*args) { |obj, i| block } → enum
   # each_with_object(obj) { |(*args), memo_obj| ... } → obj
 
 
   # entries(*args) → array
+
+  def entries(*args)
+    result = to_a()
+    result
+  end
 
   # find(ifnone = nil) { |obj| block } → obj or nil
 
@@ -202,7 +237,6 @@ module EdgetteEnumerable
 
 
   # find_index(value) → int or nil
-
   # find_index { |obj| block } → int or nil
 
   def find_index(*args)
@@ -303,7 +337,44 @@ module EdgetteEnumerable
 
   # grep_v(pattern) → array
   # grep_v(pattern) { |obj| block } → array
+
+  def grep_v(*args)
+
+    array = []
+
+    if block_given?
+
+      each do |element|
+        if !(args[0] === element)
+          array << yield(element)
+        end
+      end
+
+    else
+      each do |element|
+        if !(args[0] === element)
+          array << element
+        end
+      end
+    end
+    array
+  end
+
+
   # group_by { |obj| block } → a_hash
+
+  def group_by
+
+    hash = Hash.new
+
+    each do |element|
+
+      key = yield(element)
+      hash[key] = element
+    end
+
+    hash
+  end
 
   # include?(obj) → true or false %same as member
 
@@ -352,6 +423,21 @@ module EdgetteEnumerable
 
     if block_given?
 
+      if args.size == 2
+
+
+
+      else
+        each do |a, b|
+          if yield(a, b)
+            max = a
+          end
+        end
+
+
+      end
+
+
     else
 
       if args.size == 0
@@ -374,7 +460,7 @@ module EdgetteEnumerable
     end
 
 
-
+    max
   end
 
 
@@ -545,7 +631,12 @@ module EdgetteEnumerable
 
   # sort { |a, b| block } → array
 
+  def sort(&block)
 
+    array = to_a().sort_by(&block)
+
+    array
+  end
 
 
   # sort_by { |obj| block } → array
