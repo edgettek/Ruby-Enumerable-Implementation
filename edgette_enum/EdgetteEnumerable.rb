@@ -370,7 +370,16 @@ module EdgetteEnumerable
     each do |element|
 
       key = yield(element)
-      hash[key] = element
+
+      if hash.has_key? key
+        array = hash.fetch key
+        hash.delete key
+        array << element
+        hash[key] = array
+      else
+        hash[key] = [element]
+      end
+
     end
 
     hash
