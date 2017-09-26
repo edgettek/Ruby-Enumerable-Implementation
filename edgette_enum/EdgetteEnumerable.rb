@@ -178,13 +178,81 @@ module EdgetteEnumerable
   # each_cons(n) { ... } → nil
 
 
+
+
   # each_entry{ |obj| block } → enum
+
+  def each_entry
+
+    each do |object|
+      yield(object)
+    end
+
+    return self
+  end
 
 
 
   # each_slice(n) { ... } → nil
+
+  def each_slice(n)
+
+    bucket = []
+
+    length = self.count
+
+    self.each_with_index do |obj, i|
+
+
+
+      if i%n != n-1
+        bucket << obj
+      else
+        bucket << obj
+
+        yield(bucket)
+
+        bucket=[]
+
+      end
+
+      if i+1 == count && !bucket.empty?
+        yield(bucket)
+      end
+
+    end
+
+    return nil
+  end
+
+
+
+
   # each_with_index(*args) { |obj, i| block } → enum
+
+  def each_with_index(*args)
+    index = 0
+
+    each do |item|
+      yield(item, index)
+      index += 1
+    end
+
+    return self
+  end
+
+
   # each_with_object(obj) { |(*args), memo_obj| ... } → obj
+
+  def each_with_object(obj)
+
+    each do |item|
+      yield(item, obj)
+    end
+
+    return obj
+  end
+
 
 
   # entries(*args) → array
@@ -586,6 +654,21 @@ module EdgetteEnumerable
   end
 
   # reduce %see inject above
+
+  def reduce(accumulator = nil)
+    if accumulator.nil?
+      ignore_first = true
+      accumulator = first
+    end
+    is_first = true
+    each do |element|
+      unless is_first && ignore_first
+        accumulator = yield(accumulator, element)
+      end
+      is_first = false
+    end
+    accumulator
+  end
 
   # reject { |obj| block } → array
 

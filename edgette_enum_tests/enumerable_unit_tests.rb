@@ -321,62 +321,62 @@ class Enumerable_unit_tests < Minitest::Test
   #
   #
   #
-  # # each_slice(n) { ... } → nil
-  #
-  # def test_each_slice_ints
-  #
-  #   result = @integers.each_slice(2) do |number|
-  #     print number
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  # def test_each_slice_strings
-  #
-  #   result = @strings.each_slice(1) do |name|
-  #     print name
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
-  #
-  #
-  #
-  # # each_with_index(*args) { |obj, i| block } → enum
-  #
-  # # def test_each_with_ints
-  # #
-  # #   result = @integers.each_with_index do |num, index|
-  # #     print num + 'at index ' + index
-  # #   end
-  # #
-  # #   assert_equal result, @integers
-  # #
-  # # end
-  #
-  #
-  # # each_with_object(obj) { |(*args), memo_obj| ... } → obj
-  #
-  # def test_each_with_object_ints
-  #
-  #   result = @integers.each_with_object([]) do |i, mem|
-  #     mem << i * 3
-  #   end
-  #
-  #   assert_equal result, [3, 6, 9]
-  # end
-  #
-  # def test_each_with_object_string
-  #
-  #   result = @strings.each_with_object([]) do |i, mem|
-  #     mem << i + '!'
-  #   end
-  #
-  #
-  #   assert_equal result, ["Kyle!", "Preston!", "Renato!"]
-  # end
-  #
+  # each_slice(n) { ... } → nil
+
+  def test_each_slice_ints
+
+    result = @integers.each_slice(2) do |number|
+      print number
+    end
+
+    assert_nil result, nil
+  end
+
+  def test_each_slice_strings
+
+    result = @strings.each_slice(1) do |name|
+      print name
+    end
+
+    assert_nil result, nil
+  end
+
+
+
+  # each_with_index(*args) { |obj, i| block } → enum
+
+  def test_each_with_ints
+
+    result = @integers.each_with_index do |num, index|
+      print num.to_s + 'at index ' + index.to_s
+    end
+
+    assert_equal result, @integers
+
+  end
+
+
+  # each_with_object(obj) { |(*args), memo_obj| ... } → obj
+
+  def test_each_with_object_ints
+
+    result = @integers.each_with_object([]) do |i, mem|
+      mem << i * 3
+    end
+
+    assert_equal result, [3, 6, 9]
+  end
+
+  def test_each_with_object_string
+
+    result = @strings.each_with_object([]) do |i, mem|
+      mem << i + '!'
+    end
+
+
+    assert_equal result, ["Kyle!", "Preston!", "Renato!"]
+  end
+
 
   # entries(*args) → array
 
@@ -638,7 +638,7 @@ class Enumerable_unit_tests < Minitest::Test
 
   def test_grep_v_strings
 
-    result = @strings.grep_v 'Preston'
+    result = @strings.grep_v /Preston/
 
     assert_equal result, ['Kyle', 'Renato']
 
@@ -661,7 +661,7 @@ class Enumerable_unit_tests < Minitest::Test
 
   def test_grep_v_strings_2
 
-    result = @strings.grep_v('Preston')  do |name|
+    result = @strings.grep_v(/Preston/)  do |name|
       print name
     end
 
@@ -740,68 +740,68 @@ class Enumerable_unit_tests < Minitest::Test
 
   # max → obj
 
-  # def test_max_ints
-  #   result = @integers.max
-  #
-  #   assert_equal result, 3
-  # end
-  #
-  # def test_max_strings
-  #   result = @strings.max
-  #
-  #   assert_equal result, 'Renato'
-  # end
-  #
-  # # max { |a, b| block } → obj
-  #
-  # def test_max_ints_2
-  #   result = @integers.max do |a, b|
-  #     a%2 <=> b%2
-  #   end
-  #
-  #   assert_equal result, 1
-  # end
-  #
-  # def test_max_strings_2
-  #   result = @strings.max do |a, b|
-  #     a.length <=> b.length
-  #   end
-  #
-  #   assert_equal result, 'Preston'
-  # end
-  #
-  #
-  # # max(n) → array
-  #
-  # def test_max_ints_n
-  #   result = @integers.max(2)
-  #
-  #   assert_equal result, [3,2]
-  # end
-  #
-  # def test_max_strings_n
-  #   result = @strings.max(2)
-  #
-  #   assert_equal result, ['Renato', 'Preston']
-  # end
-  #
-  # # max(n) {|a,b| block } → obj
-  #
-  # def test_max_ints_2_n
-  #   result = @integers.max(2) do |a, b|
-  #     (a%2) <=> (b%2)
-  #   end
-  #
-  #   assert_equal result, [3, 1]
-  # end
-  #
-  # def test_max_strings_2_n
-  #   result = @strings.max(2) do |a, b|
-  #     a.length <=> b.length
-  #   end
-  #
-  #   assert_equal result, ['Preston', 'Renato']
-  # end
+  def test_max_ints
+    result = @integers.max
+
+    assert_equal result, 3
+  end
+
+  def test_max_strings
+    result = @strings.max
+
+    assert_equal result, 'Renato'
+  end
+
+  # max { |a, b| block } → obj
+
+  def test_max_ints_2
+    result = @integers.max do |a, b|
+      a%2 <=> b%2
+    end
+
+    assert_equal result, 1
+  end
+
+  def test_max_strings_2
+    result = @strings.max do |a, b|
+      a.length <=> b.length
+    end
+
+    assert_equal result, 'Preston'
+  end
+
+
+  # max(n) → array
+
+  def test_max_ints_n
+    result = @integers.max(2)
+
+    assert_equal result, [3,2]
+  end
+
+  def test_max_strings_n
+    result = @strings.max(2)
+
+    assert_equal result, ['Renato', 'Preston']
+  end
+
+  # max(n) {|a,b| block } → obj
+
+  def test_max_ints_2_n
+    result = @integers.max(2) do |a, b|
+      (a%2) <=> (b%2)
+    end
+
+    assert_equal result, [3, 1]
+  end
+
+  def test_max_strings_2_n
+    result = @strings.max(2) do |a, b|
+      a.length <=> b.length
+    end
+
+    assert_equal result, ['Preston', 'Renato']
+  end
 
   # # max_by {|obj| block } → obj
   #
@@ -838,7 +838,7 @@ class Enumerable_unit_tests < Minitest::Test
   #
   #   assert_equal result, ['Preston', 'Renato']
   # end
-  #
+
   # member?(obj) → true or false %same as include
 
   def test_member_int_1
@@ -1169,68 +1169,68 @@ class Enumerable_unit_tests < Minitest::Test
 
   # slice_when { |elt_before, elt_after| bool } → array
 
-  # def test_slice_when_ints
-  #
-  #   result = @integers.slice_when do |a, b|
-  #     a+b>4
-  #   end
-  #
-  #   assert_equal [[1],[2,3]], result
-  # end
-  #
-  # def test_slice_when_strings
-  #
-  #   result = @strings.slice_when do |a,b|
-  #     a.length < b.length
-  #   end
-  #
-  #   assert_equal [['Kyle'],['Preston','Renato']], result
-  # end
+  def test_slice_when_ints
+
+    result = @integers.slice_when do |a, b|
+      a+b>4
+    end
+
+    assert_equal [[1],[2,3]], result
+  end
+
+  def test_slice_when_strings
+
+    result = @strings.slice_when do |a,b|
+      a.length < b.length
+    end
+
+    assert_equal [['Kyle'],['Preston','Renato']], result
+  end
 
   # sort { |a, b| block } → array
 
-  # def test_sort_ints
-  #
-  #   result = @integers.sort do |a, b|
-  #     a <=> b
-  #   end
-  #
-  #   assert_equal result, [1, 2, 3]
-  #
-  # end
-  #
-  # def test_sort_strings
-  #
-  #   result = @strings.sort do |a, b|
-  #     a.length <=> b.length
-  #   end
-  #
-  #   assert_equal result, ['Kyle', 'Renato', 'Preston']
-  #
-  # end
+  def test_sort_ints
 
-  # # sort_by { |obj| block } → array
-  #
-  # def test_sort_by_ints
-  #
-  #   result = @integers.sort_by do |a|
-  #     a
-  #   end
-  #
-  #   assert_equal result, [1, 2, 3]
-  #
-  # end
-  #
-  # def test_sort_by_strings
-  #
-  #   result = @strings.sort_by do |a|
-  #     a.length
-  #   end
-  #
-  #   assert_equal result, ['Kyle', 'Renato', 'Preston']
-  #
-  # end
-  #
+    result = @integers.sort do |a, b|
+      a <=> b
+    end
+
+    assert_equal result, [1, 2, 3]
+
+  end
+
+  def test_sort_strings
+
+    result = @strings.sort do |a, b|
+      a.length <=> b.length
+    end
+
+    assert_equal result, ['Kyle', 'Renato', 'Preston']
+
+  end
+
+  # sort_by { |obj| block } → array
+
+  def test_sort_by_ints
+
+    result = @integers.sort_by do |a|
+      a
+    end
+
+    assert_equal result, [1, 2, 3]
+
+  end
+
+  def test_sort_by_strings
+
+    result = @strings.sort_by do |a|
+      a.length
+    end
+
+    assert_equal result, ['Kyle', 'Renato', 'Preston']
+
+  end
+
   # sum(init=0) → number
 
   def test_sum_ints
@@ -1329,29 +1329,29 @@ class Enumerable_unit_tests < Minitest::Test
     assert_equal result, ['Kyle', 'Preston', 'Renato']
   end
 
-  # # zip(arg, ...) → an_array_of_array
-  #
-  # def test_zip_ints
-  #   result = @integers.zip([4, 5, 6])
-  #
-  #   assert_equal result, [[1,4],[2,5],[3,6]]
-  # end
-  #
-  # def test_zip_strings
-  #   result = @strings.zip([4, 5, 6])
-  #
-  #   assert_equal result, [['Kyle',4],['Preston',5],['Renato',6]]
-  # end
-  #
-  # # zip(arg, ...) → { |arr| block } → nil
-  #
-  # def test_zip_ints_2
-  #   c = []
-  #   result = @integers.zip([4, 5, 6]) do |a, b|
-  #     c << a + b
-  #   end
-  #
-  #   assert_nil result, nil
-  # end
+  # zip(arg, ...) → an_array_of_array
+
+  def test_zip_ints
+    result = @integers.zip([4, 5, 6])
+
+    assert_equal result, [[1,4],[2,5],[3,6]]
+  end
+
+  def test_zip_strings
+    result = @strings.zip([4, 5, 6])
+
+    assert_equal result, [['Kyle',4],['Preston',5],['Renato',6]]
+  end
+
+  # zip(arg, ...) → { |arr| block } → nil
+
+  def test_zip_ints_2
+    c = []
+    result = @integers.zip([4, 5, 6]) do |a, b|
+      c << a + b
+    end
+
+    assert_nil result, nil
+  end
 
 end

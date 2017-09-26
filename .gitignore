@@ -11,6 +11,9 @@
 /tmp/
 .iml
 .idea/
+edgette_enum_tests/Caldwell_Unit_Tests.rb
+edgette_enum_tests/fengEnumTests.rb
+edgette_enum_tests/triple_spec.rb
 
 # Used by dotenv library to load environment variables.
 # .env

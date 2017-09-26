@@ -3,7 +3,7 @@ require '../edgette_enum/EdgetteEnumerable'
 class Triple
   include EdgetteEnumerable
 
-  def initialize(a, b, c)
+  def initialize(a = nil, b = nil, c = nil)
     @list = [a, b, c]
   end
 
