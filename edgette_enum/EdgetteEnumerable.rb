@@ -800,27 +800,28 @@ module EdgetteEnumerable
 
   # slice_when { |elt_before, elt_after| bool } → array
 
-  # def slice_when
-  #
-  #   result = []
-  #
-  #   temp = []
-  #
-  #   each do |a, b|
-  #     if yield(a, b)
-  #       temp << a
-  #       result << temp
-  #       temp = []
-  #       temp << b
-  #     else
-  #       temp << a
-  #       temp << b
-  #     end
-  #   end
-  #   result << temp
-  #
-  #   result
-  # end
+  def slice_when
+
+    result = []
+
+    temp = []
+
+    self.each_slice(2) do |a, b|
+      #print a.to_s + ' ' + b.to_s
+      if yield(a, b)
+        temp << a
+        result << temp
+        temp = []
+        temp << b
+      else
+        temp << a
+        temp << b
+      end
+    end
+    result << temp
+
+    result
+  end
 
   # sort { |a, b| block } → array
 
